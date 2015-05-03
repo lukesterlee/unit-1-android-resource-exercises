@@ -5,6 +5,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
 
 public class ResourceExercisesActivity extends AppCompatActivity {
@@ -15,6 +19,39 @@ public class ResourceExercisesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_resource_exercises);
+
+        Button button = (Button) findViewById(R.id.exercise_button);
+
+
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                EditText input = (EditText) findViewById(R.id.exercise_edit_text_input);
+                int score = Integer.parseInt(input.getText().toString());
+                TextView output = (TextView) findViewById(R.id.exercise_text_view_grade);
+                String grade = calculateGrade(score);
+                output.setText(grade);
+            }
+        });
+
+    }
+
+    public String calculateGrade(int score) {
+        if(score == 100)
+            return "A+";
+        else if(score >= 90)
+            return "A";
+        else if(score >= 80)
+            return "B";
+        else if(score >= 70)
+            return "C";
+        else if(score >= 60)
+            return "D";
+        else
+            return "F";
+
     }
 
     @Override
